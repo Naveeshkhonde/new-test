@@ -1,0 +1,86 @@
+<app-header></app-header>
+<div class="container-fluid pt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <input
+            type="text"
+            style="padding:8px;margin:15px auto;width:30%;"
+            placeholder="Type to filter the name column..."
+            (keyup)="updateFilter($event)"
+            />
+            <ngx-datatable 
+                #table 
+                class="material expandable" 
+                [rows]="rows" 
+                [columns]="columns" 
+                [headerHeight]="50"
+                [footerHeight]="50" 
+                [columnMode]="ColumnMode.force"
+                [rowHeight]="'auto'" 
+                [selected]="selected"
+                [selectionType]="SelectionType.single"
+                (activate)="onActivate($event)"
+                [scrollbarH]="true"
+                (select)="onSelect($event)"
+                [limit]="3">
+                <ngx-datatable-column name="Title" prop="title" editable="false" frozenLeft="True" ></ngx-datatable-column>
+                <ngx-datatable-column name="Cast Member" prop="castMember" editable="false" frozenLeft="True"></ngx-datatable-column>
+                <ngx-datatable-column name="Date" prop="date" editable="false" frozenLeft="True"></ngx-datatable-column>
+                <ngx-datatable-column name="Published" prop="options.published" editable="false" frozenLeft="True"></ngx-datatable-column>
+                <ngx-datatable-column name="Like" prop="like" editable="true" >
+                    <ng-template 
+                      ngx-datatable-cell-template
+                      let-rowIndex="rowIndex"
+                      let-value="value"
+                      let-row="row"
+                      let-group="group"
+                      let-rowHeight="rowHeight"
+                    >
+                    <i class="fa fa-thumbs-up cursor" [ngClass]="{'liked': value, 'notLike': !value}"  id="like" (click)="likeThumbs(rowIndex)"></i> 
+                    </ng-template>
+                  </ngx-datatable-column>
+                <ngx-datatable-column name="Comment" prop="comment">
+                    <ng-template
+                      ngx-datatable-cell-template
+                      let-rowIndex="rowIndex"
+                      let-value="value"
+                      let-row="row"
+                      let-group="group"
+                      let-rowHeight="rowHeight"
+                    >
+                      <input
+                        autofocus
+                        (blur)="updateValue($event, 'comment', rowIndex)"
+                        type="text"
+                        name="comment"
+                        [value]="value"
+                      />
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Rate" prop="rate">
+                    <ng-template
+                      ngx-datatable-cell-template
+                      let-rowIndex="rowIndex"
+                      let-value="value"
+                      let-row="row"
+                      let-group="group"
+                      let-rowHeight="rowHeight"
+                    >
+                    <select class="w-100">
+                        <option value="0" default>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  
+             </ngx-datatable>
+        </div>
+    </div>
+    </div>
+    
+    
+    

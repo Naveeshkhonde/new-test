@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <h5 class="modal-title mt-0">{{title}}</h5>
+  <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')" aria-hidden="true"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="addForm">
+    <div class="form-row py-1 px-4">
+      <div class="form-group col mb-2">
+        <label><span class="require">*</span>Title </label>
+        <input type="text" formControlName="title" class="form-control " placeholder="Please enter title"
+          [ngClass]="{ 'is-invalid': submitted && addControl.title.errors }" />
+        <div *ngIf="submitted && addControl.title.errors" class="invalid-feedback">
+          <div *ngIf="addControl.title.errors.required">Title is required</div>
+        </div>
+      </div>
+
+      <div class="form-group col mb-2">
+        <label><span class="require">*</span>Cast Member </label>
+        <input type="text" formControlName="castMember" class="form-control " placeholder="Please enter cast name"
+          [ngClass]="{ 'is-invalid': submitted && addControl.castMember.errors }" />
+        <div *ngIf="submitted && addControl.castMember.errors" class="invalid-feedback">
+          <div *ngIf="addControl.castMember.errors.required">Cast Member is required</div>
+        </div>
+      </div>
+      <div class="form-group col mb-2">
+        <label><span class="require">*</span>Date </label>
+        <input type="date" formControlName="date" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && addControl.date.errors }" />
+        <div *ngIf="submitted && addControl.date.errors" class="invalid-feedback">
+          <div *ngIf="addControl.date.errors.required">Date is required</div>
+        </div>
+      </div>
+      <div formGroupName="options">
+       
+        <div class="col">
+          <label for="reviews" class="mx-2">Reviews:</label> <br>
+          <select formControlName="reviews" class="form-controls">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <div class="col mt-2">
+          <label for="published" class="mx-2">Published:</label>
+          <input class="form-check-input" type="checkbox" id="published" formControlName="published">
+        </div>
+      </div>
+    </div>
+    <!-- <button type="submit" [disabled]="addForm.invalid">Submit</button> -->
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" (click)="onSubmit()">{{buttonText}}</button>
+  <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="modal.dismiss('Cross click')">
+    Close
+  </button>
+</div>

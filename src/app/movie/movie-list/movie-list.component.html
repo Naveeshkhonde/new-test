@@ -1,0 +1,40 @@
+<app-header></app-header>
+<div class="container pt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-warning mb-3" (click)="addEditUser('add')">Add</button>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>S. no.</th>
+                        <th>Title</th>
+                        <th>Cast Member</th>
+                        <th>Realising Date</th>
+                        <th>isPublished</th>
+                        <th>Review</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of movieList; let i = index;">
+                        <td>{{i+1}}</td>
+                        <td>{{item?.title}}</td>
+                        <td>{{item?.castMember}}</td>
+                        <td>{{item?.date | date:'dd/MM/YYYY'}}</td>
+                        <td>
+                            <span class="badge  {{item?.options?.published == 'yes' ? 'badge-success':'badge-danger'}}">
+                                {{item?.options?.published | titlecase}}
+                            </span>
+                        </td>
+                        <td>{{item?.options?.reviews}} Starts </td>
+                        <td>
+                            <i class="fa fa-edit cursor" (click)="addEditUser('edit',item)"></i>
+                            <i class="fa fa-trash cursor" (click)="removeMovie(item.id)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
